@@ -2,7 +2,21 @@
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_NjxjgIpFEeKW-c0t0ljKlg" elementId="com.example.e4.rcp.todo.application">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_QGjCQIpFEeKW-c0t0ljKlg" elementId="com.example.e4.rcp.todo.trimmedwindow">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_GUTPoIpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.perspectivestack">
-      <children xsi:type="advanced:Perspective" xmi:id="_H7LG0IpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.perspective"/>
+      <children xsi:type="advanced:Perspective" xmi:id="_H7LG0IpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.perspective" label="To-Do">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_kDKFMIpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.partsashcontainer.main" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_mguT0IpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.partstack.todooverview" containerData="40">
+            <children xsi:type="basic:Part" xmi:id="_6vxnEIpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.part.todooverview" containerData="" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.parts.TodoOverviewPart" label="To-Dos"/>
+          </children>
+          <children xsi:type="basic:PartSashContainer" xmi:id="_p0H-QIpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.partsashcontainer.tododetails" containerData="60">
+            <children xsi:type="basic:PartStack" xmi:id="_qwVu4IpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.partstack.tododetails">
+              <children xsi:type="basic:Part" xmi:id="_8jMsgIpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.part.tododetails" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.parts.TodoDetailsPart" label="Details"/>
+            </children>
+            <children xsi:type="basic:PartStack" xmi:id="_rF8ygIpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.partstack.playground">
+              <children xsi:type="basic:Part" xmi:id="_-Ug5IIpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.part.playground" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.parts.PlaygroundPart" label="Playground"/>
+            </children>
+          </children>
+        </children>
+      </children>
     </children>
   </children>
   <addons xmi:id="_NjxjgYpFEeKW-c0t0ljKlg" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
