@@ -21,9 +21,12 @@ import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.jface.fieldassist.ControlDecoration;
+import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -60,6 +63,15 @@ public class TodoDetailsPart {
 		txtSummary = new Text(parent, SWT.BORDER);
 		txtSummary.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
+
+		ControlDecoration decSummary = new ControlDecoration(txtSummary,
+				SWT.TOP | SWT.LEFT);
+		Image imgInfo = FieldDecorationRegistry.getDefault()
+				.getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION)
+				.getImage();
+		decSummary.setDescriptionText("This is the todo summary");
+		decSummary.setImage(imgInfo);
+		decSummary.setShowOnlyOnFocus(true);
 
 		lblDescription = new Label(parent, SWT.NONE);
 		lblDescription.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
