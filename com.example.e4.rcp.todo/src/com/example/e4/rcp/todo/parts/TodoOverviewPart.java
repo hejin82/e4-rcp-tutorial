@@ -9,6 +9,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import com.example.e4.rcp.todo.addons.Injectable;
+import com.example.e4.rcp.todo.model.ITodoModel;
+import com.example.e4.rcp.todo.service.TodoService;
 
 public class TodoOverviewPart {
 	private Label label;
@@ -19,6 +21,9 @@ public class TodoOverviewPart {
 		label.setText(getClass().getCanonicalName());
 
 		injectable.sayHello();
+
+		ITodoModel model = TodoService.getInstance();
+		System.out.println(model.getTodos().size());
 	}
 
 	@Focus
