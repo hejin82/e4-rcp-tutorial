@@ -21,6 +21,5 @@ Require-Bundle: org.eclipse.swt;bundle-version="3.100.1",
  org.eclipse.e4.core.services
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: com.example.e4.rcp.todo.model,
- com.example.e4.rcp.todo.service,
  javax.annotation;version="1.0.0"
 Bundle-ActivationPolicy: lazy

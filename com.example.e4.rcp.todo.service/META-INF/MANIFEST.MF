@@ -6,4 +6,5 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: EXAMPLE
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: com.example.e4.rcp.todo.model
-Export-Package: com.example.e4.rcp.todo.service
+Service-Component: OSGI-INF/component.xml
+Bundle-ActivationPolicy: lazy
