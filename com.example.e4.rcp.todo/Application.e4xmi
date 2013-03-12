@@ -16,6 +16,9 @@
                     <parameters xmi:id="_XT2w8IpaEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.commandparameter.test.input.value.bar" name="com.example.e4.rcp.todo.commandparameter.test.input" value="Bar"/>
                   </children>
                 </menus>
+                <toolbar xmi:id="_INwf0IrvEeKsXdx302y5yQ" elementId="com.example.e4.rcp.todo.toolbar.0">
+                  <children xsi:type="menu:HandledToolItem" xmi:id="_JhFv8IrvEeKsXdx302y5yQ" elementId="com.example.e4.rcp.todo.handledtoolitem.save" label="Save" command="_Kun2IIpXEeKeDbTv50ho5Q"/>
+                </toolbar>
               </children>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_rF8ygIpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.partstack.playground">
