@@ -14,6 +14,9 @@ import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBarElement;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
@@ -73,6 +76,18 @@ public class TodoDetailsPart {
 			}
 			for (MMenu mMenu : menus) {
 				System.out.println("\t\t" + mMenu.getElementId());
+			}
+		}
+
+		MinimalEObjectImpl root = (MinimalEObjectImpl) application;
+		TreeIterator<EObject> eAllContents = root.eAllContents();
+		while (eAllContents.hasNext()) {
+			EObject next = eAllContents.next();
+			if (next instanceof MApplicationElement) {
+				MApplicationElement element = (MApplicationElement) next;
+				System.out.println(element.getElementId());
+			} else {
+				System.out.println("\t" + next);
 			}
 		}
 	}
