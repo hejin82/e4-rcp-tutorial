@@ -102,11 +102,6 @@ public class TodoDetailsPart {
 		btnDone.setBounds(0, 10, 93, 18);
 		btnDone.setText("Done");
 
-		List<MMenu> menus = part.getMenus();
-		if (menus.size() == 1) {
-			service.registerContextMenu(text, menus.get(0).getElementId());
-		}
-
 		traverseModel(modelService, application);
 
 		this.initialized = true;
