@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.example.e4.rcp.todo.model.ITodoModel;
+import com.example.e4.rcp.todo.facade.ModelFacade;
 import com.example.e4.rcp.todo.model.Todo;
 
 @Creatable
@@ -127,7 +127,7 @@ public class TodoDetailsPart {
 	}
 
 	@Persist
-	public void save(MDirtyable dirty, ITodoModel model) {
+	public void save(MDirtyable dirty, ModelFacade model) {
 		model.saveTodo(todo);
 		dirty.setDirty(false);
 	}

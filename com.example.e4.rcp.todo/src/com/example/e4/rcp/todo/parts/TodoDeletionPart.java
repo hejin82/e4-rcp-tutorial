@@ -5,7 +5,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -20,13 +22,14 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 
-import com.example.e4.rcp.todo.model.ITodoModel;
+import com.example.e4.rcp.todo.event.EventConstants;
+import com.example.e4.rcp.todo.facade.ModelFacade;
 import com.example.e4.rcp.todo.model.Todo;
 
 public class TodoDeletionPart {
 
 	@Inject
-	private ITodoModel model;
+	private ModelFacade model;
 	private ComboViewer viewer;
 
 	@PostConstruct
@@ -47,8 +50,6 @@ public class TodoDeletionPart {
 		});
 		viewer.setContentProvider(ArrayContentProvider.getInstance());
 
-		updateViewer(model.getTodos());
-
 		Button button = new Button(parent, SWT.PUSH);
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -58,11 +59,17 @@ public class TodoDeletionPart {
 				if (selection.size() > 0) {
 					Todo todo = (Todo) selection.getFirstElement();
 					model.deleteTodo(todo.getId());
-					updateViewer(model.getTodos());
 				}
 			}
 		});
 		button.setText("Delete");
+	}
+
+	@Inject
+	@Optional
+	public void onDataLoaded(
+			@UIEventTopic(EventConstants.TOPIC_TODO_DATA_LOADED) List<Todo> todos) {
+		updateViewer(todos);
 	}
 
 	@Focus

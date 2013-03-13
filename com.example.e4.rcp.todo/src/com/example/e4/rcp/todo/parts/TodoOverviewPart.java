@@ -8,7 +8,10 @@ import javax.inject.Inject;
 
 import org.eclipse.core.databinding.beans.BeanProperties;
 import org.eclipse.core.databinding.observable.list.WritableList;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
@@ -33,7 +36,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
-import com.example.e4.rcp.todo.model.ITodoModel;
+import com.example.e4.rcp.todo.event.EventConstants;
+import com.example.e4.rcp.todo.facade.ModelFacade;
 import com.example.e4.rcp.todo.model.Todo;
 
 public class TodoOverviewPart {
@@ -42,7 +46,10 @@ public class TodoOverviewPart {
 	private WritableList writableList;
 
 	@Inject
-	private ITodoModel model;
+	private ModelFacade model;
+
+	@Inject
+	private IEventBroker broker;
 
 	@Inject
 	private ESelectionService selectionService;
@@ -51,7 +58,7 @@ public class TodoOverviewPart {
 	protected String searchString = "";
 
 	@PostConstruct
-	public void createControls(Composite parent, final ITodoModel model,
+	public void createControls(Composite parent, final ModelFacade model,
 			EMenuService service, MPart part) {
 		parent.setLayout(new GridLayout(1, false));
 
@@ -61,7 +68,7 @@ public class TodoOverviewPart {
 		btnLoadData.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				updateViewer(model);
+				broker.post(EventConstants.TOPIC_TODO_DATA_LOAD_REQUEST, null);
 			}
 
 		});
@@ -113,13 +120,6 @@ public class TodoOverviewPart {
 			}
 		});
 
-		writableList = new WritableList(model.getTodos(), Todo.class);
-		ViewerSupport.bind(
-				viewer,
-				writableList,
-				BeanProperties.values(new String[] { Todo.FIELD_SUMMARY,
-						Todo.FIELD_DESCRIPTION }));
-
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
@@ -135,13 +135,20 @@ public class TodoOverviewPart {
 			service.registerContextMenu(viewer.getControl(), menus.get(0)
 					.getElementId());
 		}
+
+		broker.post(EventConstants.TOPIC_TODO_DATA_LOAD_REQUEST, null);
 	}
 
-	private void updateViewer(final ITodoModel model) {
-		if (viewer != null) {
-			writableList.clear();
-			writableList.addAll(model.getTodos());
-		}
+	@Inject
+	@Optional
+	public void onDataLoaded(
+			@UIEventTopic(EventConstants.TOPIC_TODO_DATA_LOADED) List<Todo> todos) {
+		writableList = new WritableList(todos, Todo.class);
+		ViewerSupport.bind(
+				viewer,
+				writableList,
+				BeanProperties.values(new String[] { Todo.FIELD_SUMMARY,
+						Todo.FIELD_DESCRIPTION }));
 	}
 
 	@Focus
