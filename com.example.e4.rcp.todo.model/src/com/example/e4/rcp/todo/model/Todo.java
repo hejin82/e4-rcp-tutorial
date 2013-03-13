@@ -3,6 +3,13 @@ package com.example.e4.rcp.todo.model;
 import java.util.Date;
 
 public class Todo {
+
+	public static final String FIELD_ID = "id";
+	public static final String FIELD_SUMMARY = "summary";
+	public static final String FIELD_DESCRIPTION = "description";
+	public static final String FIELD_DONE = "done";
+	public static final String FIELD_DUEDATE = "duedate";
+
 	private String description = "";
 	private boolean done;
 	private Date dueDate;

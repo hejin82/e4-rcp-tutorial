@@ -6,14 +6,16 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Named;
 
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.beans.PojoProperties;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
@@ -38,6 +40,7 @@ public class TodoDetailsPart {
 	private Button btnDone;
 	private Todo todo;
 	private boolean initialized;
+	private final DataBindingContext ctx = new DataBindingContext();
 
 	@PostConstruct
 	public void createControls(Composite parent) {
@@ -51,13 +54,6 @@ public class TodoDetailsPart {
 		txtSummary = new Text(parent, SWT.BORDER);
 		txtSummary.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
-		txtSummary.addModifyListener(new ModifyListener() {
-
-			@Override
-			public void modifyText(ModifyEvent e) {
-				todo.setSummary(txtSummary.getText());
-			}
-		});
 
 		ControlDecoration decSummary = new ControlDecoration(txtSummary,
 				SWT.TOP | SWT.LEFT);
@@ -76,13 +72,6 @@ public class TodoDetailsPart {
 		txtDescription = new Text(parent, SWT.BORDER | SWT.MULTI);
 		txtDescription.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
-		txtDescription.addModifyListener(new ModifyListener() {
-
-			@Override
-			public void modifyText(ModifyEvent e) {
-				todo.setDescription(txtDescription.getText());
-			}
-		});
 
 		lblDueDate = new Label(parent, SWT.NONE);
 		lblDueDate.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
@@ -107,6 +96,26 @@ public class TodoDetailsPart {
 		this.initialized = true;
 	}
 
+	private void bind() {
+		IObservableValue target = WidgetProperties.text(SWT.Modify).observe(
+				txtSummary);
+		IObservableValue model = PojoProperties.value(Todo.FIELD_SUMMARY)
+				.observe(todo);
+		ctx.bindValue(target, model);
+
+		target = WidgetProperties.text(SWT.Modify).observe(txtDescription);
+		model = PojoProperties.value(Todo.FIELD_DESCRIPTION).observe(todo);
+		ctx.bindValue(target, model);
+
+		target = WidgetProperties.selection().observe(btnDone);
+		model = PojoProperties.value(Todo.FIELD_DONE).observe(todo);
+		ctx.bindValue(target, model);
+
+		target = WidgetProperties.selection().observe(date);
+		model = PojoProperties.value(Todo.FIELD_DUEDATE).observe(todo);
+		ctx.bindValue(target, model);
+	}
+
 	@Focus
 	public void onFocus() {
 		txtSummary.setFocus();
@@ -116,7 +125,9 @@ public class TodoDetailsPart {
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Todo todo) {
 		if (todo != null) {
 			this.todo = todo;
+			ctx.dispose();
 			update();
+			bind();
 		}
 	}
 
@@ -133,5 +144,6 @@ public class TodoDetailsPart {
 
 	@PreDestroy
 	public void dispose() {
+		ctx.dispose();
 	}
 }
