@@ -6,12 +6,13 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
+import org.eclipse.core.databinding.beans.BeanProperties;
+import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.databinding.viewers.ViewerSupport;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
@@ -34,6 +35,7 @@ import com.example.e4.rcp.todo.model.Todo;
 public class TodoOverviewPart {
 
 	private Button btnLoadData;
+	private WritableList writableList;
 
 	@Inject
 	private ITodoModel model;
@@ -51,8 +53,9 @@ public class TodoOverviewPart {
 		btnLoadData.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				viewer.setInput(model.getTodos());
+				updateViewer(model);
 			}
+
 		});
 
 		Text search = new Text(parent, SWT.SEARCH | SWT.CANCEL
@@ -81,28 +84,13 @@ public class TodoOverviewPart {
 		viewer = new TableViewer(parent, SWT.MULTI);
 		Table table = viewer.getTable();
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		viewer.setContentProvider(ArrayContentProvider.getInstance());
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		TableViewerColumn column = new TableViewerColumn(viewer, SWT.NONE);
-		column.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Todo todo = (Todo) element;
-				return todo.getSummary();
-			}
-		});
 		column.getColumn().setWidth(100);
 		column.getColumn().setText("Summary");
 
 		column = new TableViewerColumn(viewer, SWT.NONE);
-		column.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				Todo todo = (Todo) element;
-				return todo.getDescription();
-			}
-		});
 		column.getColumn().setWidth(200);
 		column.getColumn().setText("Description");
 
@@ -117,12 +105,24 @@ public class TodoOverviewPart {
 			}
 		});
 
-		viewer.setInput(model.getTodos());
+		writableList = new WritableList(model.getTodos(), Todo.class);
+		ViewerSupport.bind(
+				viewer,
+				writableList,
+				BeanProperties.values(new String[] { Todo.FIELD_SUMMARY,
+						Todo.FIELD_DESCRIPTION }));
 
 		List<MMenu> menus = part.getMenus();
 		if (menus.size() == 1) {
 			service.registerContextMenu(viewer.getControl(), menus.get(0)
 					.getElementId());
+		}
+	}
+
+	private void updateViewer(final ITodoModel model) {
+		if (viewer != null) {
+			writableList.clear();
+			writableList.addAll(model.getTodos());
 		}
 	}
 
