@@ -9,6 +9,7 @@ import javax.inject.Named;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.PojoProperties;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -29,6 +30,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.example.e4.rcp.todo.model.Todo;
 
+@Creatable
 public class TodoDetailsPart {
 	private Text txtSummary;
 	private Label lblDescription;

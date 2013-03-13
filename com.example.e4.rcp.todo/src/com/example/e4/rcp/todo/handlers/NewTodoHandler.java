@@ -13,10 +13,11 @@ import com.example.e4.rcp.todo.wizards.NewTodoWizard;
 public class NewTodoHandler {
 
 	@Execute
-	public void execute(Shell shell, ITodoModel model) {
+	public void execute(Shell shell, ITodoModel model, NewTodoWizard wizard) {
 		Todo todo = new Todo();
 		todo.setDueDate(new Date());
-		WizardDialog dialog = new WizardDialog(shell, new NewTodoWizard(todo));
+		wizard.setTodo(todo);
+		WizardDialog dialog = new WizardDialog(shell, wizard);
 		if (dialog.open() == WizardDialog.OK) {
 			model.saveTodo(todo);
 		}
