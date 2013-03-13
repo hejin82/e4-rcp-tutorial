@@ -1,17 +1,22 @@
 package com.example.e4.rcp.todo.parts;
 
-import java.util.Calendar;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.PojoProperties;
+import org.eclipse.core.databinding.observable.ChangeEvent;
+import org.eclipse.core.databinding.observable.IChangeListener;
+import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.fieldassist.ControlDecoration;
@@ -28,21 +33,33 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.example.e4.rcp.todo.model.ITodoModel;
 import com.example.e4.rcp.todo.model.Todo;
 
 @Creatable
 public class TodoDetailsPart {
-	private Text txtSummary;
+	private final DataBindingContext ctx = new DataBindingContext();
+	private Button btnDone;
+	private Composite composite;
+	private DateTime date;
+	private boolean initialized;
 	private Label lblDescription;
 	private Label lblDueDate;
-	private Text txtDescription;
-	private Composite composite;
 	private Label lblSummary;
-	private DateTime date;
-	private Button btnDone;
 	private Todo todo;
-	private boolean initialized;
-	private final DataBindingContext ctx = new DataBindingContext();
+	private Text txtDescription;
+	private Text txtSummary;
+
+	@Inject
+	MDirtyable dirty;
+
+	private final IChangeListener listener = new IChangeListener() {
+
+		@Override
+		public void handleChange(ChangeEvent event) {
+			dirty.setDirty(true);
+		}
+	};
 
 	@PostConstruct
 	public void createControls(Composite parent) {
@@ -98,6 +115,35 @@ public class TodoDetailsPart {
 		this.initialized = true;
 	}
 
+	@PreDestroy
+	public void dispose() {
+		unbind();
+		initialized = false;
+	}
+
+	@Focus
+	public void onFocus() {
+		txtSummary.setFocus();
+	}
+
+	@Persist
+	public void save(MDirtyable dirty, ITodoModel model) {
+		model.saveTodo(todo);
+		dirty.setDirty(false);
+	}
+
+	@Inject
+	public void setTodo(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Todo todo) {
+		unbind();
+		this.todo = todo;
+		if (this.todo != null) {
+			if (initialized) {
+				bind();
+			}
+		}
+	}
+
 	private void bind() {
 		IObservableValue target = WidgetProperties.text(SWT.Modify).observe(
 				txtSummary);
@@ -116,36 +162,22 @@ public class TodoDetailsPart {
 		target = WidgetProperties.selection().observe(date);
 		model = PojoProperties.value(Todo.FIELD_DUEDATE).observe(todo);
 		ctx.bindValue(target, model);
-	}
 
-	@Focus
-	public void onFocus() {
-		txtSummary.setFocus();
-	}
-
-	public void setTodo(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Todo todo) {
-		if (todo != null) {
-			this.todo = todo;
-			ctx.dispose();
-			update();
-			bind();
+		IObservableList providers = ctx.getValidationStatusProviders();
+		for (Object object : providers) {
+			Binding b = (Binding) object;
+			b.getTarget().addChangeListener(listener);
 		}
 	}
 
-	private void update() {
-		if (this.todo != null && initialized) {
-			txtSummary.setText(this.todo.getSummary());
-			txtDescription.setText(this.todo.getDescription());
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(this.todo.getDueDate());
-			date.setDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
-					cal.get(Calendar.DAY_OF_MONTH));
-		}
-	}
+	private void unbind() {
+		dirty.setDirty(false);
 
-	@PreDestroy
-	public void dispose() {
+		IObservableList providers = ctx.getValidationStatusProviders();
+		for (Object object : providers) {
+			Binding b = (Binding) object;
+			b.getTarget().removeChangeListener(listener);
+		}
 		ctx.dispose();
 	}
 }

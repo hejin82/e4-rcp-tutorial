@@ -2,6 +2,7 @@ package com.example.e4.rcp.todo.wizards;
 
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -18,6 +19,9 @@ public class NewTodoDetailsWizardPage extends WizardPage {
 	@Inject
 	private TodoDetailsPart part;
 
+	@Inject
+	private IEclipseContext context;
+
 	public NewTodoDetailsWizardPage() {
 		super(NewTodoDetailsWizardPage.class.getName());
 		setTitle("New Todo");
@@ -29,6 +33,12 @@ public class NewTodoDetailsWizardPage extends WizardPage {
 	}
 
 	@Override
+	public void dispose() {
+		part.dispose();
+		super.dispose();
+	}
+
+	@Override
 	@Inject
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
@@ -36,5 +46,4 @@ public class NewTodoDetailsWizardPage extends WizardPage {
 		part.setTodo(todo);
 		setControl(container);
 	}
-
 }

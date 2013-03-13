@@ -11,8 +11,12 @@ import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
 import org.eclipse.jface.databinding.viewers.ViewerSupport;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
@@ -39,6 +43,10 @@ public class TodoOverviewPart {
 
 	@Inject
 	private ITodoModel model;
+
+	@Inject
+	private ESelectionService selectionService;
+
 	private TableViewer viewer;
 	protected String searchString = "";
 
@@ -111,6 +119,16 @@ public class TodoOverviewPart {
 				writableList,
 				BeanProperties.values(new String[] { Todo.FIELD_SUMMARY,
 						Todo.FIELD_DESCRIPTION }));
+
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection selection = (IStructuredSelection) viewer
+						.getSelection();
+				selectionService.setSelection(selection.getFirstElement());
+			}
+		});
 
 		List<MMenu> menus = part.getMenus();
 		if (menus.size() == 1) {
