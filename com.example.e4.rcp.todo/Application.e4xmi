@@ -58,6 +58,7 @@
   <handlers xmi:id="_HK4CkIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.handlers.test" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.TestHandler" command="_RqGagIpXEeKeDbTv50ho5Q"/>
   <bindingTables xmi:id="_MMv1cIphEeK7bJ3cLuRhbA" elementId="com.example.e4.rcp.todo.bindingtable.todo" bindingContext="_BS7zQIphEeK7bJ3cLuRhbA">
     <bindings xmi:id="_NswPoIphEeK7bJ3cLuRhbA" elementId="com.example.e4.rcp.todo.keybinding.save" keySequence="M1+S" command="_Kun2IIpXEeKeDbTv50ho5Q"/>
+    <bindings xmi:id="_AmumgIu_EeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.keybinding.0" keySequence="M1+N" command="_O5FEYIpXEeKeDbTv50ho5Q"/>
   </bindingTables>
   <rootContext xmi:id="_BS7zQIphEeK7bJ3cLuRhbA" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="Windows and Dialogs">
     <children xmi:id="_IsurUIphEeK7bJ3cLuRhbA" elementId="org.eclipse.ui.contexts.dialog" name="Dialog"/>
