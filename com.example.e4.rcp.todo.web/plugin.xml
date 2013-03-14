@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            name="to-do"
+            application="org.semanticsoft.vaaclipse.app.application">
+         <property
+               name="appName"
+               value="to-do">
+         </property>
+         <property
+               name="applicationXMI"
+               value="com.example.e4.rcp.todo.web/Application.e4xmi">
+         </property>
+         <property
+               name="cssTheme"
+               value="reindeer">
+         </property>
+         <property
+               name="applicationHeaderIcon"
+               value="platform:/plugin/com.example.e4.rcp.todo.web/icons/vaaclipse.png">
+         </property>
+         <property
+               name="applicationAuthenticationProvider"
+               value="bundleclass://com.example.e4.rcp.todo.web/com.example.e4.rcp.todo.web.login.LoginProvider">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.semanticsoft.vaaclipse.theme">
+         <themecontribution
+            cssUri="platform:/plugin/org.semanticsoft.vaaclipse.resources/VAADIN/themes/vaaclipse_default_theme/styles.css"
+            id="org.semanticsoft.vaaclipse.resources"
+            insertPosition="after=MAIN_CSS">
+         <resourceLocationUri
+               uri="platform:/plugin/org.semanticsoft.vaaclipse.resources/VAADIN/themes/vaaclipse_default_theme/">
+         </resourceLocationUri>
+         <themeid
+               refid="reindeer">
+         </themeid>
+      </themecontribution>
+      <themecontribution
+            cssUri="css/main.css"
+            id="com.example.e4.rcp.todo.web.maincontrib"
+            insertPosition="after=MAIN_CSS">
+         <resourceLocationUri
+               uri="icons/">
+         </resourceLocationUri>
+         <themeid
+               refid="reindeer">
+         </themeid>
+      </themecontribution>
+   </extension>
+
+</plugin>
