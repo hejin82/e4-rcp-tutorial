@@ -51,6 +51,7 @@
           <parameters xmi:id="_vT77QIpZEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.commandparameter.test.input.value.quux" name="com.example.e4.rcp.todo.commandparameter.test.input" value="Quux"/>
         </children>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_i24vEIymEeKQ-aRgOUfjIg" elementId="com.example.e4.rcp.todo.handledmenuitem.entercredentials" label="Enter Credentials" command="_cYiLkIymEeKQ-aRgOUfjIg"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_UsPs8Iy0EeKRj4vTpGlboQ" elementId="com.example.e4.rcp.todo.handledmenuitem.themeswitcher" label="Switch Theme" command="_OFy9YIy0EeKRj4vTpGlboQ"/>
       </children>
     </mainMenu>
     <trimBars xmi:id="_tx06MIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.trimbar">
@@ -67,6 +68,7 @@
   <handlers xmi:id="_GHuUoIvlEeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.handler.switch" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.PerspectiveSwitchHandler" command="_IagPkIvlEeKli9Qvuiplyw"/>
   <handlers xmi:id="_Xmn3oIvpEeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.handler.addpart" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.DynamicPartHandler" command="_ZZe8YIvpEeKli9Qvuiplyw"/>
   <handlers xmi:id="_elfyYIymEeKQ-aRgOUfjIg" elementId="com.example.e4.rcp.todo.handler.entercredentials" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.EnterCredentialsHandler" command="_cYiLkIymEeKQ-aRgOUfjIg"/>
+  <handlers xmi:id="_QM2wgIy0EeKRj4vTpGlboQ" elementId="com.example.e4.rcp.todo.handler.themeswitcher" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.ThemeSwitchHandler" command="_OFy9YIy0EeKRj4vTpGlboQ"/>
   <bindingTables xmi:id="_MMv1cIphEeK7bJ3cLuRhbA" elementId="com.example.e4.rcp.todo.bindingtable.todo" bindingContext="_BS7zQIphEeK7bJ3cLuRhbA">
     <bindings xmi:id="_NswPoIphEeK7bJ3cLuRhbA" elementId="com.example.e4.rcp.todo.keybinding.save" keySequence="M1+S" command="_Kun2IIpXEeKeDbTv50ho5Q"/>
     <bindings xmi:id="_AmumgIu_EeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.keybinding.0" keySequence="M1+N" command="_O5FEYIpXEeKeDbTv50ho5Q"/>
@@ -86,6 +88,7 @@
   <commands xmi:id="_IagPkIvlEeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.command.switch" commandName="Switch"/>
   <commands xmi:id="_ZZe8YIvpEeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.command.addpart" commandName="Add Part"/>
   <commands xmi:id="_cYiLkIymEeKQ-aRgOUfjIg" elementId="com.example.e4.rcp.todo.command.entercredentials" commandName="Enter Credentials"/>
+  <commands xmi:id="_OFy9YIy0EeKRj4vTpGlboQ" elementId="com.example.e4.rcp.todo.command.themeswitcher" commandName="Switch Theme"/>
   <addons xmi:id="_NjxjgYpFEeKW-c0t0ljKlg" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_NjxjgopFEeKW-c0t0ljKlg" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_Njxjg4pFEeKW-c0t0ljKlg" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
