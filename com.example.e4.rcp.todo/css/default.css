@@ -1,0 +1,29 @@
+Label {
+	font: Verdana 8px;
+	color: black;
+}
+
+Composite Label {
+	color: black;
+}
+
+Composite Text {
+	background-color: white;
+	color: black;
+}
+
+.MPart {
+	background-color: #EFF9FE;
+}
+
+.MPartStack {
+	background-color: #21AEED;
+}
+
+SashForm {
+	background-color: #C1D5EF;
+}
+
+Table {
+	background-color: #EFF9FE;
+}
