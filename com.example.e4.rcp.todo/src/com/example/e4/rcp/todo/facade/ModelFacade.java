@@ -39,7 +39,7 @@ public class ModelFacade implements ITodoModel {
 	@Override
 	public boolean saveTodo(Todo todo) {
 		boolean result = model.saveTodo(todo);
-		broker.post(EventConstants.TOPIC_TODO_DATA_UPDATE_UPDATED, todo);
+		broker.post(EventConstants.TOPIC_TODO_DATA_UPDATE_NEW, todo);
 		return result;
 	}
 

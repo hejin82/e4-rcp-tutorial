@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.eclipse.core.databinding.beans.BeanProperties;
 import org.eclipse.core.databinding.observable.list.WritableList;
@@ -14,12 +15,15 @@ import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
 import org.eclipse.jface.databinding.viewers.ViewerSupport;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
@@ -149,6 +153,34 @@ public class TodoOverviewPart {
 				writableList,
 				BeanProperties.values(new String[] { Todo.FIELD_SUMMARY,
 						Todo.FIELD_DESCRIPTION }));
+	}
+
+	@Inject
+	public void setTodo(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Todo todo) {
+		if (viewer != null) {
+			ISelection selection;
+			if (todo != null) {
+				selection = new StructuredSelection(todo);
+			} else {
+				selection = StructuredSelection.EMPTY;
+			}
+			viewer.setSelection(selection);
+		}
+	}
+
+	@Inject
+	@Optional
+	public void onTodoDeleted(
+			@UIEventTopic(EventConstants.TOPIC_TODO_DATA_UPDATE_DELETE) Todo todo) {
+		writableList.remove(todo);
+	}
+
+	@Inject
+	@Optional
+	public void onTodoAdded(
+			@UIEventTopic(EventConstants.TOPIC_TODO_DATA_UPDATE_NEW) Todo todo) {
+		writableList.add(todo);
 	}
 
 	@Focus

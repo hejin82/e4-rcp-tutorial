@@ -4,14 +4,21 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UIEventTopic;
+import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -30,6 +37,10 @@ public class TodoDeletionPart {
 
 	@Inject
 	private ModelFacade model;
+	@Inject
+	private IEventBroker broker;
+	@Inject
+	private ESelectionService selectionService;
 	private ComboViewer viewer;
 
 	@PostConstruct
@@ -50,6 +61,16 @@ public class TodoDeletionPart {
 		});
 		viewer.setContentProvider(ArrayContentProvider.getInstance());
 
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection selection = (IStructuredSelection) viewer
+						.getSelection();
+				selectionService.setSelection(selection.getFirstElement());
+			}
+		});
+
 		Button button = new Button(parent, SWT.PUSH);
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -66,10 +87,38 @@ public class TodoDeletionPart {
 	}
 
 	@Inject
+	public void setTodo(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Todo todo) {
+		if (viewer != null) {
+			ISelection selection;
+			if (todo != null) {
+				selection = new StructuredSelection(todo);
+			} else {
+				selection = StructuredSelection.EMPTY;
+			}
+			viewer.setSelection(selection);
+		}
+	}
+
+	@Inject
 	@Optional
 	public void onDataLoaded(
 			@UIEventTopic(EventConstants.TOPIC_TODO_DATA_LOADED) List<Todo> todos) {
 		updateViewer(todos);
+	}
+
+	@Inject
+	@Optional
+	public void onTodoDeleted(
+			@UIEventTopic(EventConstants.TOPIC_TODO_DATA_UPDATE_DELETE) Todo todo) {
+		viewer.remove(todo);
+	}
+
+	@Inject
+	@Optional
+	public void onTodoAdded(
+			@UIEventTopic(EventConstants.TOPIC_TODO_DATA_UPDATE_NEW) Todo todo) {
+		viewer.add(todo);
 	}
 
 	@Focus

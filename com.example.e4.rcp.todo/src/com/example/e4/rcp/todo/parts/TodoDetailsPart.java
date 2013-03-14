@@ -141,6 +141,12 @@ public class TodoDetailsPart {
 			if (initialized) {
 				bind();
 			}
+		} else {
+			if (initialized) {
+				txtSummary.setText("");
+				txtDescription.setText("");
+				btnDone.setSelection(false);
+			}
 		}
 	}
 
