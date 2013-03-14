@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Creatable;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -14,6 +15,8 @@ import com.example.e4.rcp.todo.parts.TodoDetailsPart;
 @Creatable
 public class NewTodoDetailsWizardPage extends WizardPage {
 
+	@Inject
+	@Optional
 	private Todo todo;
 
 	@Inject

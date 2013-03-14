@@ -1,5 +1,6 @@
 package com.example.e4.rcp.todo.wizards;
 
+import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -9,6 +10,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+@Creatable
 public class NewTodoValidateWizardPage extends WizardPage {
 
 	public NewTodoValidateWizardPage() {
