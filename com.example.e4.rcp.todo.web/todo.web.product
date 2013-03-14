@@ -25,11 +25,7 @@
    </vm>
 
    <plugins>
-      <plugin id="com.example.e4.rcp.todo"/>
       <plugin id="com.example.e4.rcp.todo.contribute"/>
-      <plugin id="com.example.e4.rcp.todo.event"/>
-      <plugin id="com.example.e4.rcp.todo.model"/>
-      <plugin id="com.example.e4.rcp.todo.service"/>
       <plugin id="com.example.e4.rcp.todo.web"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.vaadin"/>
