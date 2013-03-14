@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_aUB_MIyQEeKwLfpN8zklZA">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_a-zagIyQEeKwLfpN8zklZA" featurename="commands" parentElementId="com.example.e4.rcp.todo.application">
+    <elements xsi:type="commands:Command" xmi:id="_fZmK0IyQEeKwLfpN8zklZA" elementId="com.example.e4.rcp.todo.contribute.command.openmap" commandName="Open Map"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_jRUqUIyQEeKwLfpN8zklZA" featurename="handlers" parentElementId="com.example.e4.rcp.todo.application">
+    <elements xsi:type="commands:Handler" xmi:id="_ls7xIIyQEeKwLfpN8zklZA" elementId="com.example.e4.rcp.todo.contribute.handler.openmap" contributionURI="bundleclass://com.example.e4.rcp.todo.contribute/com.example.e4.rcp.todo.contribute.handlers.OpenMapHandler" command="_fZmK0IyQEeKwLfpN8zklZA"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_of1WkIyQEeKwLfpN8zklZA" featurename="children" parentElementId="org.eclipse.ui.main.menu">
+    <elements xsi:type="menu:Menu" xmi:id="_TkoSgIyREeKwLfpN8zklZA" elementId="com.example.e4.rcp.todo.contribute.menu.openmap" label="Map">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_tIFUEIyQEeKwLfpN8zklZA" elementId="com.example.e4.rcp.todo.contribute.handledmenuitem.openmap" label="Open Map" command="_fZmK0IyQEeKwLfpN8zklZA"/>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>
