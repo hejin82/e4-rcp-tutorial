@@ -32,6 +32,9 @@ public class ModelFacade implements ITodoModel {
 	@Override
 	public List<Todo> getTodos() {
 		List<Todo> todos = model.getTodos();
+		for (Todo todo : todos) {
+			enhanceTodo(todo);
+		}
 		broker.post(EventConstants.TOPIC_TODO_DATA_LOADED, todos);
 		return todos;
 	}
@@ -39,6 +42,7 @@ public class ModelFacade implements ITodoModel {
 	@Override
 	public boolean saveTodo(Todo todo) {
 		boolean result = model.saveTodo(todo);
+		enhanceTodo(todo);
 		broker.post(EventConstants.TOPIC_TODO_DATA_UPDATE_NEW, todo);
 		return result;
 	}
@@ -54,5 +58,9 @@ public class ModelFacade implements ITodoModel {
 		boolean result = model.deleteTodo(id);
 		broker.post(EventConstants.TOPIC_TODO_DATA_UPDATE_DELETE, todo);
 		return result;
+	}
+
+	public void enhanceTodo(Todo todo) {
+		todo.setEventBroker(broker);
 	}
 }

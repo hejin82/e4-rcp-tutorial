@@ -181,6 +181,7 @@ public class TodoOverviewPart {
 	public void onTodoAdded(
 			@UIEventTopic(EventConstants.TOPIC_TODO_DATA_UPDATE_NEW) Todo todo) {
 		writableList.add(todo);
+		setTodo(todo);
 	}
 
 	@Focus

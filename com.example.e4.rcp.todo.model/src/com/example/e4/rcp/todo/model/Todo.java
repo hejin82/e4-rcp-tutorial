@@ -4,6 +4,10 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Date;
 
+import org.eclipse.e4.core.services.events.IEventBroker;
+
+import com.example.e4.rcp.todo.event.EventConstants;
+
 public class Todo {
 
 	public static final String FIELD_ID = "id";
@@ -20,6 +24,7 @@ public class Todo {
 	private Date dueDate;
 	private long id;
 	private String summary = "";
+	private IEventBroker broker;
 
 	public Todo() {
 	}
@@ -45,6 +50,10 @@ public class Todo {
 
 	public void removePropertyChangeListener(PropertyChangeListener l) {
 		changeSupport.removePropertyChangeListener(l);
+	}
+
+	public void setEventBroker(IEventBroker broker) {
+		this.broker = broker;
 	}
 
 	@Override
@@ -99,25 +108,35 @@ public class Todo {
 	public void setDone(boolean done) {
 		boolean oldValue = this.done;
 		this.done = done;
-		changeSupport.firePropertyChange(FIELD_DONE, oldValue, this.done);
+		notifyChanged(FIELD_DONE, oldValue, this.done);
 	}
 
 	public void setDueDate(Date dueDate) {
 		Date oldValue = this.dueDate;
 		this.dueDate = dueDate;
-		changeSupport.firePropertyChange(FIELD_DUEDATE, oldValue, this.dueDate);
+		notifyChanged(FIELD_DUEDATE, oldValue, this.dueDate);
 	}
 
 	public void setId(long id) {
 		long oldValue = this.id;
 		this.id = id;
-		changeSupport.firePropertyChange(FIELD_ID, oldValue, this.id);
+		notifyChanged(FIELD_ID, oldValue, this.id);
 	}
 
 	public void setSummary(String summary) {
 		String oldValue = this.summary;
 		this.summary = summary;
-		changeSupport.firePropertyChange(FIELD_SUMMARY, oldValue, this.summary);
+		notifyChanged(FIELD_SUMMARY, oldValue, this.summary);
+	}
+
+	private void notifyChanged(String fieldName, Object oldValue,
+			Object newValue) {
+		if (changeSupport != null) {
+			changeSupport.firePropertyChange(fieldName, oldValue, newValue);
+		}
+		if (broker != null) {
+			broker.post(EventConstants.TOPIC_TODO_DATA_UPDATE_UPDATED, this);
+		}
 	}
 
 	@Override

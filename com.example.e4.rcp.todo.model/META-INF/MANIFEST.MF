@@ -7,3 +7,4 @@ Bundle-Vendor: EXAMPLE
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: com.example.e4.rcp.todo.model
 Import-Package: com.example.e4.rcp.todo.event
+Require-Bundle: org.eclipse.e4.core.services;bundle-version="1.0.0"

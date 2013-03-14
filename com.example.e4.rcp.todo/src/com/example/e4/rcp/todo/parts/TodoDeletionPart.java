@@ -119,6 +119,14 @@ public class TodoDeletionPart {
 	public void onTodoAdded(
 			@UIEventTopic(EventConstants.TOPIC_TODO_DATA_UPDATE_NEW) Todo todo) {
 		viewer.add(todo);
+		setTodo(todo);
+	}
+
+	@Inject
+	@Optional
+	public void onTodoUpdated(
+			@UIEventTopic(EventConstants.TOPIC_TODO_DATA_UPDATE_UPDATED) Todo todo) {
+		viewer.refresh(todo);
 	}
 
 	@Focus
