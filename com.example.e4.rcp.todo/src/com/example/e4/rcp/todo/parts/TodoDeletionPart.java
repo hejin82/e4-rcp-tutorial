@@ -84,6 +84,8 @@ public class TodoDeletionPart {
 			}
 		});
 		button.setText("Delete");
+
+		broker.post(EventConstants.TOPIC_TODO_DATA_LOAD_REQUEST, null);
 	}
 
 	@Inject
