@@ -8,7 +8,7 @@
             <children xsi:type="basic:PartStack" xmi:id="_mguT0IpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.partstack.todooverview" containerData="" selectedElement="_6vxnEIpGEeKeDbTv50ho5Q">
               <children xsi:type="basic:Part" xmi:id="_6vxnEIpGEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.part.todooverview" containerData="" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.parts.TodoOverviewPart" label="To-Dos">
                 <menus xmi:id="_5IOUMIsnEeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.popupmenu.table">
-                  <children xsi:type="menu:HandledMenuItem" xmi:id="_8mrYEIsnEeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.handledmenuitem.remove" label="Remove Todo" command="_Qn4vkIpXEeKeDbTv50ho5Q"/>
+                  <children xsi:type="menu:HandledMenuItem" xmi:id="_8mrYEIsnEeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.handledmenuitem.remove" label="Remove Todo"/>
                 </menus>
               </children>
             </children>
@@ -46,7 +46,6 @@
       </children>
       <children xsi:type="menu:Menu" xmi:id="_dpsZAIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.menu.edit" label="Edit">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_nI6sgIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.handledmenuitem.new" label="New Todo" command="_O5FEYIpXEeKeDbTv50ho5Q"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_peCJwIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.handledmenuitem.remove" label="Remove Todo" command="_Qn4vkIpXEeKeDbTv50ho5Q"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_rcA5YIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.handledmenuitem.test" label="For testing" command="_RqGagIpXEeKeDbTv50ho5Q">
           <parameters xmi:id="_vT77QIpZEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.commandparameter.test.input.value.quux" name="com.example.e4.rcp.todo.commandparameter.test.input" value="Quux"/>
         </children>
@@ -63,7 +62,6 @@
   <handlers xmi:id="__wNAwIpWEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.handlers.save" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.SaveAllHandler" command="_Kun2IIpXEeKeDbTv50ho5Q"/>
   <handlers xmi:id="_B-qcYIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.handlers.exit" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.ExitHandler" command="_NF4BYIpXEeKeDbTv50ho5Q"/>
   <handlers xmi:id="_Dw_VoIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.handlers.new" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.NewTodoHandler" command="_O5FEYIpXEeKeDbTv50ho5Q"/>
-  <handlers xmi:id="_FUDD0IpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.handlers.remove" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.RemoveTodoHandler" command="_Qn4vkIpXEeKeDbTv50ho5Q"/>
   <handlers xmi:id="_HK4CkIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.handlers.test" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.TestHandler" command="_RqGagIpXEeKeDbTv50ho5Q"/>
   <handlers xmi:id="_GHuUoIvlEeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.handler.switch" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.PerspectiveSwitchHandler" command="_IagPkIvlEeKli9Qvuiplyw"/>
   <handlers xmi:id="_Xmn3oIvpEeKli9Qvuiplyw" elementId="com.example.e4.rcp.todo.handler.addpart" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.DynamicPartHandler" command="_ZZe8YIvpEeKli9Qvuiplyw"/>
@@ -81,7 +79,6 @@
   <commands xmi:id="_Kun2IIpXEeKeDbTv50ho5Q" elementId="org.eclipse.ui.file.saveAll" commandName="Save"/>
   <commands xmi:id="_NF4BYIpXEeKeDbTv50ho5Q" elementId="org.eclipse.ui.file.exit" commandName="Exit"/>
   <commands xmi:id="_O5FEYIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.new" commandName="New Todo"/>
-  <commands xmi:id="_Qn4vkIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.remove" commandName="Remove Todo"/>
   <commands xmi:id="_RqGagIpXEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.test" commandName="For testing">
     <parameters xmi:id="_hpVMcIpZEeKeDbTv50ho5Q" elementId="com.example.e4.rcp.todo.commandparameter.test.input" name="Input"/>
   </commands>

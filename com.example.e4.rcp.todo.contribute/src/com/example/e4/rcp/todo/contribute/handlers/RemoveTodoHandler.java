@@ -1,4 +1,4 @@
-package com.example.e4.rcp.todo.handlers;
+package com.example.e4.rcp.todo.contribute.handlers;
 
 import javax.inject.Named;
 
