@@ -20,6 +20,10 @@
                name="cssTheme"
                value="com.example.e4.rcp.todo.theme.default">
          </property>
+         <property
+               name="rendererFactoryUri"
+               value="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.renderer.TodoRendererFactory">
+         </property>
       </product>
    </extension>
    <extension
