@@ -11,7 +11,7 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import com.example.e4.rcp.todo.event.EventConstants;
-import com.example.e4.rcp.todo.model.ITodoModel;
+import com.example.e4.rcp.todo.facade.ModelFacade;
 import com.example.e4.rcp.todo.model.Todo;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.util.BeanItemContainer;
@@ -27,6 +27,10 @@ public class TodoOverviewView {
 	private IEventBroker eventBroker;
 
 	private IEclipseContext context;
+
+	private final ComboBox combo;
+
+	private final ModelFacade model;
 
 	private final Field.ValueChangeListener listener = new Field.ValueChangeListener() {
 
@@ -58,11 +62,24 @@ public class TodoOverviewView {
 
 		}
 	};
+	private final EventHandler todoAddedHandler = new EventHandler() {
 
-	private final ComboBox combo;
+		@Override
+		public void handleEvent(Event event) {
+			Object data = event.getProperty(EventUtils.DATA);
+			if (data instanceof Todo) {
+				combo.removeAllItems();
+				BeanItemContainer<Todo> container = new BeanItemContainer<Todo>(
+						Todo.class, model.getTodos());
+				combo.setContainerDataSource(container);
+			}
+
+		}
+	};
 
 	@Inject
-	public TodoOverviewView(ComponentContainer parent, ITodoModel model) {
+	public TodoOverviewView(ComponentContainer parent, ModelFacade model) {
+		this.model = model;
 		parent.addComponent(new Label("To-Do Overview"));
 
 		BeanItemContainer<Todo> container = new BeanItemContainer<Todo>(
@@ -82,6 +99,8 @@ public class TodoOverviewView {
 		this.eventBroker = eventBroker;
 		this.context = context;
 
+		this.eventBroker.subscribe(EventConstants.TOPIC_TODO_DATA_UPDATE_NEW,
+				todoAddedHandler);
 		this.eventBroker.subscribe(
 				EventConstants.TOPIC_TODO_DATA_UPDATE_DELETE,
 				todoRemovedHandler);
@@ -90,6 +109,7 @@ public class TodoOverviewView {
 	@PreDestroy
 	public void preDestroy() {
 		if (this.eventBroker != null) {
+			this.eventBroker.unsubscribe(todoAddedHandler);
 			this.eventBroker.unsubscribe(todoRemovedHandler);
 		}
 	}

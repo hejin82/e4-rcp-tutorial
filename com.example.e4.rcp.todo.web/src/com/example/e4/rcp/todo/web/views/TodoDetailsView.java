@@ -7,24 +7,35 @@ import javax.inject.Inject;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.extensions.EventUtils;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import com.example.e4.rcp.todo.event.EventConstants;
+import com.example.e4.rcp.todo.facade.ModelFacade;
 import com.example.e4.rcp.todo.model.Todo;
 import com.vaadin.data.util.ObjectProperty;
+import com.vaadin.event.FieldEvents.TextChangeEvent;
+import com.vaadin.event.FieldEvents.TextChangeListener;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 public class TodoDetailsView {
-	private final Label summary = new Label();
-	private final Label description = new Label("", Label.CONTENT_TEXT);
 
 	protected Todo todo;
+	private final ModelFacade facade;
 	private final HorizontalLayout layout = new HorizontalLayout();
 	private GridLayout grid;
+
+	@Inject
+	private MDirtyable dirtable;
+
+	private final TextField summary = new TextField();
+	private final TextField description = new TextField();
 
 	private final EventHandler todoSelectedHandler = new EventHandler() {
 
@@ -49,10 +60,30 @@ public class TodoDetailsView {
 		}
 	};
 
+	private final TextChangeListener textChangeListener = new TextChangeListener() {
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void textChange(TextChangeEvent event) {
+			if (!dirtable.isDirty()) {
+				dirtable.setDirty(true);
+			}
+		}
+	};
+
 	@Inject
-	public TodoDetailsView(VerticalLayout parent, IEclipseContext context) {
+	public TodoDetailsView(VerticalLayout parent, IEclipseContext context,
+			ModelFacade facade) {
+		this.facade = facade;
 		layout.setSizeFull();
 		parent.addComponent(layout);
+
+		this.summary.setImmediate(true);
+		this.description.setImmediate(true);
+
+		this.summary.addListener(textChangeListener);
+		this.description.addListener(textChangeListener);
 	}
 
 	@PostConstruct
@@ -102,5 +133,13 @@ public class TodoDetailsView {
 	public void preDestroy(IEventBroker broker) {
 		broker.unsubscribe(todoSelectedHandler);
 		broker.unsubscribe(todoUpdatedHandler);
+	}
+
+	@Persist
+	public void persist() {
+		todo.setSummary(summary.getValue().toString());
+		todo.setDescription(description.getValue().toString());
+		facade.saveTodo(todo);
+		dirtable.setDirty(false);
 	}
 }

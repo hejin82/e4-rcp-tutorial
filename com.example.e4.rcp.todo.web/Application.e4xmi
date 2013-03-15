@@ -15,16 +15,16 @@
       </children>
     </children>
     <mainMenu xmi:id="_KosWmDjEEeKcQPOnIbNSoQ" elementId="org.eclipse.ui.main.menu">
-      <children xsi:type="menu:Menu" xmi:id="_KosWmTjEEeKcQPOnIbNSoQ" label="File">
+      <children xsi:type="menu:Menu" xmi:id="_KosWmTjEEeKcQPOnIbNSoQ" elementId="org.eclipse.ui.file.menu" label="File">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_KosWnDjEEeKcQPOnIbNSoQ" label="Quit" command="_KosWijjEEeKcQPOnIbNSoQ"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_KosWnTjEEeKcQPOnIbNSoQ" label="Help">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_KosWnjjEEeKcQPOnIbNSoQ" label="About" command="_KosWlDjEEeKcQPOnIbNSoQ"/>
       </children>
     </mainMenu>
-    <trimBars xmi:id="_KosWozjEEeKcQPOnIbNSoQ">
-      <children xsi:type="menu:ToolBar" xmi:id="_KosWpDjEEeKcQPOnIbNSoQ" elementId="toolbar:org.eclipse.ui.main.toolbar">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_KosWpTjEEeKcQPOnIbNSoQ" iconURI="platform:/plugin/com.example.e4.rcp.todo.web/icons/sample.gif" command="_KosWlDjEEeKcQPOnIbNSoQ"/>
+    <trimBars xmi:id="_KosWozjEEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.trimbar">
+      <children xsi:type="menu:ToolBar" xmi:id="_KosWpDjEEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.toolbar">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_KosWpTjEEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.toolbar.about" iconURI="platform:/plugin/com.example.e4.rcp.todo.web/icons/sample.gif" command="_KosWlDjEEeKcQPOnIbNSoQ"/>
       </children>
     </trimBars>
   </children>

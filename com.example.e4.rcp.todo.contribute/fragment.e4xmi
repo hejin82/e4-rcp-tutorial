@@ -3,15 +3,23 @@
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_a-zagIyQEeKwLfpN8zklZA" featurename="commands" parentElementId="com.example.e4.rcp.todo.application">
     <elements xsi:type="commands:Command" xmi:id="_fZmK0IyQEeKwLfpN8zklZA" elementId="com.example.e4.rcp.todo.contribute.command.openmap" commandName="Open Map"/>
     <elements xsi:type="commands:Command" xmi:id="_K9FysI1GEeKi5e3VmYdL0w" elementId="com.example.e4.rcp.todo.contribute.command.removetodo" commandName="Remove Todo"/>
+    <elements xsi:type="commands:Command" xmi:id="_DzNXMI1MEeKi5e3VmYdL0w" elementId="com.example.e4.rcp.todo.contribute.command.save" commandName="Save"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_jRUqUIyQEeKwLfpN8zklZA" featurename="handlers" parentElementId="com.example.e4.rcp.todo.application">
     <elements xsi:type="commands:Handler" xmi:id="_ls7xIIyQEeKwLfpN8zklZA" elementId="com.example.e4.rcp.todo.contribute.handler.openmap" contributionURI="bundleclass://com.example.e4.rcp.todo.contribute/com.example.e4.rcp.todo.contribute.handlers.OpenMapHandler" command="_fZmK0IyQEeKwLfpN8zklZA"/>
     <elements xsi:type="commands:Handler" xmi:id="_NgEFwI1GEeKi5e3VmYdL0w" elementId="com.example.e4.rcp.todo.contribute.handler.removetodo" contributionURI="bundleclass://com.example.e4.rcp.todo.contribute/com.example.e4.rcp.todo.contribute.handlers.RemoveTodoHandler" command="_K9FysI1GEeKi5e3VmYdL0w"/>
+    <elements xsi:type="commands:Handler" xmi:id="_HGklYI1MEeKi5e3VmYdL0w" elementId="com.example.e4.rcp.todo.contribute.handler.save" contributionURI="bundleclass://com.example.e4.rcp.todo.contribute/com.example.e4.rcp.todo.contribute.handlers.SaveAllHandler" command="_DzNXMI1MEeKi5e3VmYdL0w"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_of1WkIyQEeKwLfpN8zklZA" featurename="children" parentElementId="org.eclipse.ui.main.menu">
     <elements xsi:type="menu:Menu" xmi:id="_TkoSgIyREeKwLfpN8zklZA" elementId="com.example.e4.rcp.todo.contribute.menu.openmap" label="Shared">
       <children xsi:type="menu:HandledMenuItem" xmi:id="_tIFUEIyQEeKwLfpN8zklZA" elementId="com.example.e4.rcp.todo.contribute.handledmenuitem.openmap" label="Open Map" command="_fZmK0IyQEeKwLfpN8zklZA"/>
       <children xsi:type="menu:HandledMenuItem" xmi:id="_RGDVAI1GEeKi5e3VmYdL0w" elementId="com.example.e4.rcp.todo.contribute.handledmenuitem.removetodo" label="Remove To-Do" command="_K9FysI1GEeKi5e3VmYdL0w"/>
     </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_e8wXYI1MEeKi5e3VmYdL0w" featurename="children" parentElementId="org.eclipse.ui.file.menu">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_mXRoMI1MEeKi5e3VmYdL0w" elementId="com.example.e4.rcp.todo.contribute.handledmenuitem.save" label="Save" tooltip="Save" command="_DzNXMI1MEeKi5e3VmYdL0w"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_hZ550I1NEeKaAsbx7at4yQ" featurename="children" parentElementId="com.example.e4.rcp.todo.toolbar">
+    <elements xsi:type="menu:HandledToolItem" xmi:id="_ApKyMI1OEeKaAsbx7at4yQ" elementId="com.example.e4.rcp.todo.contribute.handledtoolitem.save" label="Save" command="_DzNXMI1MEeKi5e3VmYdL0w"/>
   </fragments>
 </fragment:ModelFragments>
