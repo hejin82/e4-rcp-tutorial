@@ -18,9 +18,10 @@ import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.AbstractSelect;
 import com.vaadin.ui.AbstractSelect.Filtering;
 import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.Field;
-import com.vaadin.ui.Label;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.VerticalLayout;
 
 public class TodoOverviewView {
 
@@ -31,6 +32,8 @@ public class TodoOverviewView {
 	private final ComboBox combo;
 
 	private final ModelFacade model;
+
+	private final HorizontalLayout layout = new HorizontalLayout();
 
 	private final Field.ValueChangeListener listener = new Field.ValueChangeListener() {
 
@@ -68,19 +71,28 @@ public class TodoOverviewView {
 		public void handleEvent(Event event) {
 			Object data = event.getProperty(EventUtils.DATA);
 			if (data instanceof Todo) {
+				Todo currentSelection = (Todo) combo.getValue();
 				combo.removeAllItems();
 				BeanItemContainer<Todo> container = new BeanItemContainer<Todo>(
 						Todo.class, model.getTodos());
 				combo.setContainerDataSource(container);
+				combo.select(currentSelection);
 			}
 
 		}
 	};
 
 	@Inject
-	public TodoOverviewView(ComponentContainer parent, ModelFacade model) {
+	public TodoOverviewView(VerticalLayout parent, ModelFacade model) {
 		this.model = model;
-		parent.addComponent(new Label("To-Do Overview"));
+
+		layout.setSizeFull();
+		parent.addComponent(layout);
+
+		GridLayout grid = new GridLayout(1, 2);
+		grid.setSizeFull();
+
+		layout.addComponent(grid);
 
 		BeanItemContainer<Todo> container = new BeanItemContainer<Todo>(
 				Todo.class, model.getTodos());
@@ -89,7 +101,7 @@ public class TodoOverviewView {
 		combo.setItemCaptionMode(AbstractSelect.ITEM_CAPTION_MODE_PROPERTY);
 		combo.setFilteringMode(Filtering.FILTERINGMODE_CONTAINS);
 		combo.setImmediate(true);
-		parent.addComponent(combo);
+		grid.addComponent(combo);
 
 		combo.addListener(listener);
 	}
