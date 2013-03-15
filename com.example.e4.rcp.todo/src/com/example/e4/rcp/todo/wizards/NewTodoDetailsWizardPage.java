@@ -31,10 +31,6 @@ public class NewTodoDetailsWizardPage extends WizardPage {
 		setDescription("Enter the todo data");
 	}
 
-	public void setTodo(Todo todo) {
-		this.todo = todo;
-	}
-
 	@Override
 	public void dispose() {
 		part.dispose();

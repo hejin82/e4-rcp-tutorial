@@ -26,6 +26,7 @@
 
    <plugins>
       <plugin id="at.bestsolution.efxclipse.runtime.osgi" fragment="true"/>
+      <plugin id="com.example.e4.rcp.todo.annotation"/>
       <plugin id="com.example.e4.rcp.todo.contribute"/>
       <plugin id="com.example.e4.rcp.todo.event"/>
       <plugin id="com.example.e4.rcp.todo.model"/>

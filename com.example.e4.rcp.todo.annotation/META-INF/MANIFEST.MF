@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Annotation
+Bundle-SymbolicName: com.example.e4.rcp.todo.annotation
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: EXAMPLE
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: javax.inject;bundle-version="1.0.0",
+ org.eclipse.e4.core.di;bundle-version="1.2.0"
+Import-Package: com.example.e4.rcp.todo.facade,
+ com.example.e4.rcp.todo.model
+Export-Package: com.example.e4.rcp.todo.annotation
+Service-Component: OSGI-INF/component.xml
+Bundle-ActivationPolicy: lazy

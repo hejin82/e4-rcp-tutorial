@@ -32,6 +32,7 @@
    </features>
 
    <configurations>
+      <plugin id="com.example.e4.rcp.todo.annotation" autoStart="true" startLevel="4" />
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="1" />
       <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="3" />
    </configurations>
