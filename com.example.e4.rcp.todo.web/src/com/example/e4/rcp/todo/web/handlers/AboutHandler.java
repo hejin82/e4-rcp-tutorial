@@ -7,6 +7,6 @@ import com.vaadin.Application;
 public class AboutHandler {
 	@Execute
 	public void execute(Application vaadinApp) {
-		vaadinApp.getMainWindow().showNotification("Vaadin E4 Application");
+		vaadinApp.getMainWindow().showNotification("Your To-do cloud service!");
 	}
 }

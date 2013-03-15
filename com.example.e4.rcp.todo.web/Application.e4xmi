@@ -3,13 +3,13 @@
   <children xsi:type="basic:TrimmedWindow" xmi:id="_KosWlzjEEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.window.main" label="com.example.e4.rcp.todo.web" width="500" height="400">
     <tags>mainWindow</tags>
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_KosWnzjEEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.perspectivestack">
-      <children xsi:type="advanced:Perspective" xmi:id="_KosWoDjEEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.perspective.0">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_KosWoTjEEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.sashcontainer.0" horizontal="true">
+      <children xsi:type="advanced:Perspective" xmi:id="_KosWoDjEEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.perspective.main">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_KosWoTjEEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.sashcontainer.main" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_KosWojjEEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.partstack.left" containerData="50">
-            <children xsi:type="basic:Part" xmi:id="_Ls9AEDmZEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.part.first" contributionURI="bundleclass://com.example.e4.rcp.todo.web/com.example.e4.rcp.todo.web.views.FirstView" label="First" tooltip="First"/>
+            <children xsi:type="basic:Part" xmi:id="_Ls9AEDmZEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.part.overview" contributionURI="bundleclass://com.example.e4.rcp.todo.web/com.example.e4.rcp.todo.web.views.TodoOverviewPart" label="To-Dos" tooltip="To-Do"/>
           </children>
           <children xsi:type="basic:PartStack" xmi:id="_HRRcwDmKEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.partstack.right" containerData="50">
-            <children xsi:type="basic:Part" xmi:id="_3U12cDmjEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.part.second" contributionURI="bundleclass://com.example.e4.rcp.todo.web/com.example.e4.rcp.todo.web.views.SecondView" label="Second" tooltip="Second"/>
+            <children xsi:type="basic:Part" xmi:id="_3U12cDmjEeKcQPOnIbNSoQ" elementId="com.example.e4.rcp.todo.web.part.details" contributionURI="bundleclass://com.example.e4.rcp.todo.web/com.example.e4.rcp.todo.web.views.TodoDetailsView" label="To-Do Detail" tooltip="Detail"/>
           </children>
         </children>
       </children>

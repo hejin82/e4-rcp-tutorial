@@ -29,6 +29,7 @@
       <plugin id="com.example.e4.rcp.todo.contribute"/>
       <plugin id="com.example.e4.rcp.todo.event"/>
       <plugin id="com.example.e4.rcp.todo.model"/>
+      <plugin id="com.example.e4.rcp.todo.model.di"/>
       <plugin id="com.example.e4.rcp.todo.service"/>
       <plugin id="com.example.e4.rcp.todo.web"/>
       <plugin id="com.ibm.icu"/>

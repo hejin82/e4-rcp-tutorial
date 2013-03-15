@@ -7,4 +7,5 @@ public class EventConstants {
 	public static final String TOPIC_TODO_DATA_UPDATE_UPDATED = "TOPIC_TODO_DATA_UPDATE/UPDATED";
 	public static final String TOPIC_TODO_DATA_LOADED = "TOPIC_TODO_DATA_LOADED";
 	public static final String TOPIC_TODO_DATA_LOAD_REQUEST = "TOPIC_TODO_DATA_LOAD_REQUEST";
+	public static final String TOPIC_TODO_DATA_SELECTED = "TOPIC_TODO_DATA_SELECTED";
 }
